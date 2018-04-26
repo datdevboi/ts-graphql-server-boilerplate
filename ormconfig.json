@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "",
+  "password": "postgres",
   "database": "graphql-ts-server",
   "synchronize": true,
   "logging": false,
