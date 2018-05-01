@@ -1,10 +1,8 @@
-import { User } from "./../entity/User";
-
 import { request } from "graphql-request";
-import { startServer } from "../startServer";
+import { User } from "../../entity/User";
+import { startServer } from "../../startServer";
 
 let getHost = () => "";
-
 beforeAll(async () => {
   const app = await startServer();
   const { port } = app.address();
