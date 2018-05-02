@@ -8,7 +8,7 @@ export const resolvers: ResolverMap = {
       _,
       { email, password }: GQL.IRegisterOnMutationArguments
     ) => {
-      const userAlreadyExist = User.findOne({
+      const userAlreadyExist = await User.findOne({
         where: {
           email
         },
