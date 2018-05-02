@@ -2,6 +2,7 @@ import * as bcrypt from "bcryptjs";
 import * as yup from "yup";
 import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
+import { formatYupError } from "../../utils/formatYupError";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,7 +24,7 @@ export const resolvers: ResolverMap = {
           abortEarly: false
         });
       } catch (err) {
-        console.log(err);
+        return formatYupError(err);
       }
 
       const { email, password } = args;
