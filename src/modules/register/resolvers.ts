@@ -3,16 +3,21 @@ import * as yup from "yup";
 import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
 import { formatYupError } from "../../utils/formatYupError";
+import {
+  duplicateEmail,
+  invalidEmail,
+  passwordNotLongEnough
+} from "./errorMessages";
 
 const schema = yup.object().shape({
   email: yup
     .string()
     .min(3)
     .max(255)
-    .email(),
+    .email(invalidEmail),
   password: yup
     .string()
-    .min(3)
+    .min(3, passwordNotLongEnough)
     .max(255)
 });
 
@@ -40,7 +45,7 @@ export const resolvers: ResolverMap = {
         return [
           {
             path: "email",
-            message: "Email already taken"
+            message: duplicateEmail
           }
         ];
       }
