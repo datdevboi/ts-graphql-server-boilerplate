@@ -58,11 +58,7 @@ export const resolvers: ResolverMap = {
 
       await user.save();
 
-      const link = await createConfirmEmailLink(
-        context.url,
-        user.id,
-        context.redis
-      );
+      await createConfirmEmailLink(context.url, user.id, context.redis);
 
       return null;
     }
