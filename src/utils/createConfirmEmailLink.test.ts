@@ -11,8 +11,8 @@ let id: string = "";
 beforeAll(async () => {
   await createTypeormConn();
   user = await User.create({
-    email: "test2@test.com",
-    password: "test2@test"
+    email: "test3@test.com",
+    password: "test3@test"
   }).save();
 });
 
@@ -36,14 +36,5 @@ describe("test createConfirmEmailLink", async () => {
 
     const data = await redis.get(id);
     expect(data).toBeNull();
-  });
-
-  test("sends invalid back if bad id is used", async () => {
-    const response = await fetch(
-      `${process.env.TEST_HOST}/confirm/ajfkdjgijdirhakfj`
-    );
-    const text = await response.text();
-
-    expect(text).toBe("invalid");
   });
 });
