@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import * as dotenv from "dotenv";
+// tslint:disable-next-line:no-submodule-imports
+import "dotenv/config";
 import { startServer } from "./startServer";
-dotenv.config();
 
 startServer();
