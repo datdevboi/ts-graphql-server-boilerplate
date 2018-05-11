@@ -5,6 +5,7 @@ import { createTypeormConn } from "./utils/createTypeormConn";
 
 import { confirmEmail } from "./routes/confirmEmail";
 import { redis } from "./redis";
+import "dotenv/config";
 
 export const startServer = async () => {
   const server = new GraphQLServer({
