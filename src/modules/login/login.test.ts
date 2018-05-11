@@ -26,7 +26,7 @@ const loginMutation = (e: string, p: string) => `
     }
 `;
 
-const loginExpectError = async(e: string, p: string, errorMsg: string) {
+ const loginExpectError = async(e: string, p: string, errorMsg: string) {
     const response = await request(
         process.env.TEST_HOST as string,
         loginMutation(e, p)
@@ -70,6 +70,13 @@ describe("login", () => {
 
 
     await loginExpectError(email, "kdjaifjdfihdfj", invalidLogin);
+
+    const response = await request(process.env.TEST_HOST as string,
+    loginMutation(email, password));
+
+    expect(response).toEqual({login: null});
+
+
 
 
 
