@@ -10,7 +10,11 @@ export const resolvers: ResolverMap = {
     bye2: () => "bye"
   },
   Mutation: {
-    login: async (_, { email, password }: GQL.IRegisterOnMutationArguments) => {
+    login: async (
+      _,
+      { email, password }: GQL.IRegisterOnMutationArguments,
+      { session }
+    ) => {
       // Find User
       const user = await User.findOne({
         where: {
@@ -49,6 +53,9 @@ export const resolvers: ResolverMap = {
           }
         ];
       }
+
+      // login succesful
+      session.userId = user.id;
 
       return null;
     }
