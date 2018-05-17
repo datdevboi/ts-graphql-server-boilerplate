@@ -8,6 +8,7 @@ export default async (
   info: any
 ) => {
   // middleware
+
   const result = await resolver(parent, args, context, info);
 
   // afterware
