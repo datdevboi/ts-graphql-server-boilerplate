@@ -1,4 +1,3 @@
-import * as bcrypt from "bcryptjs";
 import * as yup from "yup";
 import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
