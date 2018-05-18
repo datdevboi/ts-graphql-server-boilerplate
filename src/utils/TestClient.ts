@@ -18,6 +18,22 @@ export class TestClient {
     };
   }
 
+  async register(email: string, password: string) {
+    return rp.post(this.url, {
+      ...this.options,
+      body: {
+        query: `
+        mutation {
+          register(email: "${email}", password: "${password}"){
+            path
+            message
+          }
+      }
+    `
+      }
+    });
+  }
+
   async login(email: string, password: string) {
     return rp.post(this.url, {
       ...this.options,
