@@ -24,23 +24,6 @@ afterAll(async () => {
   await conn.close();
 });
 
-const loginMutation = (e: string, p: string) => `
-    mutation {
-        login(email: "${e}", password: "${p}"){
-          path
-          message
-        }
-    }
-`;
-
-const meQuery = `
-    {
-      me {
-        id
-        email
-      }
-    }
-`;
 describe("me", async () => {
   test("return null if no cookie", async () => {
     const client = new TestClient(process.env.TEST_HOST as string);
