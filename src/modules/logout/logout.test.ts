@@ -24,7 +24,28 @@ afterAll(async () => {
 });
 
 describe("logout", async () => {
-  test("logout current user", async () => {
+  test("multiple sessions", async () => {
+    // create 1st session
+    const client1 = new TestClient(process.env.TEST_HOST as string);
+    // create 2nd session
+    const client2 = new TestClient(process.env.TEST_HOST as string);
+
+    // session 1 login
+    await client1.login(email, password);
+    // session 2 login
+    await client2.login(email, password);
+
+    // Make sure we get the same user
+    expect(await client1.me()).toEqual(await client2.me());
+
+    // Logout one of the users
+    const response = await client1.logout();
+    console.log(response);
+
+    expect(await client1.me()).toEqual(await client2.me());
+  });
+
+  test("single sessions", async () => {
     const client = new TestClient(process.env.TEST_HOST as string);
 
     // Login the User
@@ -33,13 +54,18 @@ describe("logout", async () => {
     // Get current User
     const response = await client.me();
 
-    const currentUser = response.data.me;
-    expect(currentUser.email).toEqual(email);
-    expect(currentUser.id).toEqual(userId);
+    expect(response.data).toEqual({
+      me: {
+        id: userId,
+        email
+      }
+    });
 
     // Logout user
-    const logoutResponse = await client.logout();
+    await client.logout();
 
-    expect(logoutResponse.data.logout).toBeNull();
+    const response2 = await client.me();
+
+    expect(response2.data.me).toBeNull();
   });
 });
