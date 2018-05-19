@@ -23,6 +23,9 @@ const schema = yup.object().shape({
 });
 
 export const resolvers: ResolverMap = {
+  Query: {
+    bye: () => "Bye"
+  },
   Mutation: {
     register: async (_, args: GQL.IRegisterOnMutationArguments, context) => {
       try {
