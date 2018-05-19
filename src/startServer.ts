@@ -1,3 +1,4 @@
+import { redisSessionPrefix } from "./constants";
 import { genSchema } from "./utils/genSchema";
 import { GraphQLServer } from "graphql-yoga";
 import * as session from "express-session";
@@ -15,13 +16,17 @@ export const startServer = async () => {
     context: ({ request }) => ({
       redis,
       url: request.protocol + "://" + request.get("host"),
-      session: request.session
+      session: request.session,
+      req: request
     })
   });
 
   server.express.use(
     session({
-      store: new RedisStore({}),
+      store: new RedisStore({
+        client: redis as any,
+        prefix: redisSessionPrefix
+      }),
       name: "qid",
       secret: process.env.SESSION_SECRET as string,
       resave: false,

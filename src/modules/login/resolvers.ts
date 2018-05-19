@@ -13,7 +13,7 @@ export const resolvers: ResolverMap = {
     login: async (
       _,
       { email, password }: GQL.IRegisterOnMutationArguments,
-      { session }
+      { session, redis, req }
     ) => {
       // Find User
       const user = await User.findOne({
@@ -56,6 +56,9 @@ export const resolvers: ResolverMap = {
 
       // login succesful
       session.userId = user.id;
+
+      // store session id in a list with the key of the userid
+      await redis.lpush(user.id, req.sessionID);
 
       return null;
     }
