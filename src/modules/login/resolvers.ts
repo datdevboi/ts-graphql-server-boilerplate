@@ -1,3 +1,4 @@
+import { userSessionIdPrefix } from "./../../constants";
 import * as bcrypt from "bcryptjs";
 
 import { ResolverMap } from "../../types/graphql-utils";
@@ -58,7 +59,7 @@ export const resolvers: ResolverMap = {
       session.userId = user.id;
 
       // store session id in a list with the key of the userid
-      await redis.lpush(user.id, req.sessionID);
+      await redis.lpush(`${userSessionIdPrefix}${user.id}`, req.sessionID);
 
       return null;
     }
