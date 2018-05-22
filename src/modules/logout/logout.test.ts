@@ -39,8 +39,7 @@ describe("logout", async () => {
     expect(await client1.me()).toEqual(await client2.me());
 
     // Logout one of the users
-    const response = await client1.logout();
-    console.log(response);
+    await client1.logout();
 
     expect(await client1.me()).toEqual(await client2.me());
   });
