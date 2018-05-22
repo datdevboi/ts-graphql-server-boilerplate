@@ -3,7 +3,11 @@ import * as bcrypt from "bcryptjs";
 
 import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
-import { invalidLogin, confirmEmailError } from "./errorMessages";
+import {
+  invalidLogin,
+  confirmEmailError,
+  forgotPasswordLockedError
+} from "./errorMessages";
 
 // TODO FIX THE GENERATE SCHEMA SCRIPT ERROR
 export const resolvers: ResolverMap = {
@@ -51,6 +55,16 @@ export const resolvers: ResolverMap = {
           {
             path: "email",
             message: confirmEmailError
+          }
+        ];
+      }
+
+      // Check if accounts locked
+      if (user.forgotPasswordLocked) {
+        return [
+          {
+            path: "email",
+            message: forgotPasswordLockedError
           }
         ];
       }
