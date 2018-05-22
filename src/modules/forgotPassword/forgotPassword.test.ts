@@ -37,9 +37,6 @@ describe("forgot password", async () => {
     const url = await createForgotPasswordLink("", userId, redis);
     const key = url.split("/").slice(-1)[0];
 
-    const id = await redis.get(`${forgotPasswordPrefix}${key}`);
-    expect(id).toEqual(userId);
-
     const response = await client.forgotPasswordChange(newPassword, key);
 
     expect(response.data).toEqual({
