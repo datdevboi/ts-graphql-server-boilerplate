@@ -7,7 +7,7 @@ import { User } from "./../../entity/User";
 import { createTypeormConn } from "../../utils/createTypeormConn";
 import { Connection } from "typeorm";
 import { TestClient } from "../../utils/TestClient";
-import { forgotPasswordPrefix } from "../../constants";
+
 import { forgotPasswordLockedError } from "../login/errorMessages";
 
 let conn: Connection;
@@ -38,11 +38,15 @@ describe("forgot password", async () => {
     // create client
     const client = new TestClient(process.env.TEST_HOST as string);
 
+    // lock account
+    await forgotPasswordLockAccount(userId, redis);
     const url = await createForgotPasswordLink("", userId, redis);
+
     const key = url.split("/").slice(-1)[0];
 
     // Make sure user can't login
     const loginResponse = await client.login(email, password);
+
     expect(loginResponse.data.login).toEqual([
       {
         path: "email",
@@ -73,7 +77,7 @@ describe("forgot password", async () => {
       data: {
         forgotPasswordChange: [
           {
-            path: "newPassword",
+            path: "key",
             message: expiredKeyError
           }
         ]
