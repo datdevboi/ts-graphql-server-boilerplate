@@ -68,7 +68,7 @@ export const resolvers: ResolverMap = {
       );
 
       if (process.env.NODE_ENV !== "test") {
-        await sendEmail(user.email, url);
+        await sendEmail(user.email as string, url);
       }
 
       return null;
