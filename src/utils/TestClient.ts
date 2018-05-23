@@ -94,4 +94,17 @@ export class TestClient {
       }
     });
   }
+
+  async sendForgotPasswordEmail(email: string) {
+    return rp.post(this.url, {
+      ...this.options,
+      body: {
+        query: `
+        mutation {
+            sendForgotPasswordEmail(email: "${email}")
+        }
+    `
+      }
+    });
+  }
 }
