@@ -1,24 +1,24 @@
 import * as fs from "fs";
 import * as path from "path";
-import { importSchema } from "graphql-import";
+import { mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 
-import { mergeSchemas, makeExecutableSchema } from "graphql-tools";
-import { GraphQLSchema } from "graphql";
+import { makeExecutableSchema } from "graphql-tools";
+
+import * as glob from "glob";
 
 export const genSchema = () => {
-  const schemas: GraphQLSchema[] = [];
+  const pathToModules = path.join(__dirname, "../modules");
 
-  const folders = fs.readdirSync(path.join(__dirname, "../modules"));
+  const graphqlTypes = glob
+    .sync(`${pathToModules}/**/*.graphql`)
+    .map(x => fs.readFileSync(x, { encoding: "utf8" }));
 
-  folders.forEach(folder => {
-    const { resolvers } = require(`../modules/${folder}/resolvers`);
+  const resolvers = glob
+    .sync(`{pathToModules}/**/resolvers.?s`)
+    .map(resolver => require(resolver).resolvers);
 
-    const typeDefs = importSchema(
-      path.join(__dirname, `../modules/${folder}/schema.graphql`)
-    );
-
-    schemas.push(makeExecutableSchema({ resolvers, typeDefs }));
+  return makeExecutableSchema({
+    typeDefs: mergeTypes(graphqlTypes),
+    resolvers: mergeResolvers(resolvers)
   });
-
-  return mergeSchemas({ schemas });
 };
