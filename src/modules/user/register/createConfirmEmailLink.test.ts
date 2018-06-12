@@ -1,8 +1,8 @@
-import { createTestConn } from "./../../testUtils/createTestConn";
+import { createTestConn } from "../../../testUtils/createTestConn";
 import * as Redis from "ioredis";
 import fetch from "node-fetch";
 
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import { createConfirmEmailLink } from "./createConfirmedEmailLink";
 
 const redis: Redis.Redis = new Redis();
