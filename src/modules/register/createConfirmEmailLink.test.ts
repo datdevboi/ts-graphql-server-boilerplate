@@ -10,12 +10,12 @@ let userId: string = "";
 
 beforeAll(async () => {
   await createTestConn();
-  const user = await User.create({
+  const createdUser = await User.create({
     email: "test3@test.com",
     password: "test3@test"
   }).save();
 
-  userId = user.id;
+  userId = createdUser.id;
 });
 
 describe("test createConfirmEmailLink", async () => {
