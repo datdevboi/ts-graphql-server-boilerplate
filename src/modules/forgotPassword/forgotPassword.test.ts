@@ -4,21 +4,23 @@ import { forgotPasswordLockAccount } from "./../../utils/forgotPasswordLockAccou
 import * as Redis from "ioredis";
 import { createForgotPasswordLink } from "./../../utils/createForgotPasswordLink";
 import { User } from "./../../entity/User";
-import { createTypeormConn } from "../../utils/createTypeormConn";
+
 import { Connection } from "typeorm";
 import { TestClient } from "../../utils/TestClient";
+import * as faker from "faker";
 
 import { forgotPasswordLockedError } from "../login/errorMessages";
+import { createTestConn } from "../../testUtils/createTestConn";
 
 let conn: Connection;
-const email = "test@test.com";
-const password = "test";
-const newPassword = "newTestPassword";
+const email = faker.internet.password();
+const password = faker.internet.password();
+const newPassword = faker.internet.password();
 let userId: string;
 const redis = new Redis();
 
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
 
   const user = await User.create({
     email,

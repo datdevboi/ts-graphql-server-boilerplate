@@ -1,6 +1,7 @@
-import { createTypeormConn } from "./../../utils/createTypeormConn";
-import { request } from "graphql-request";
+import { createTestConn } from "./../../testUtils/createTestConn";
+
 import { User } from "../../entity/User";
+import * as faker from "faker";
 
 import {
   duplicateEmail,
@@ -11,13 +12,13 @@ import {
 import { Connection } from "typeorm";
 import { TestClient } from "../../utils/TestClient";
 
-const email = "test@test.com";
-const password = "test1";
+const email = faker.internet.email();
+const password = faker.internet.password();
 
 let conn: Connection;
 
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
 });
 
 afterAll(async () => {

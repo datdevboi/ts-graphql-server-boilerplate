@@ -1,31 +1,13 @@
+import { createTestConn } from "./../../testUtils/createTestConn";
 import { TestClient } from "./../../utils/TestClient";
-import { createTypeormConn } from "./../../utils/createTypeormConn";
-import { request } from "graphql-request";
 
+import * as faker from "faker";
 import { invalidLogin, confirmEmailError } from "./errorMessages";
 import { User } from "../../entity/User";
 import { Connection } from "typeorm";
 
-const email = "test@test.com";
-const password = "test1";
-
-const registerMutation = (e: string, p: string) => `
-    mutation {
-        register(email: "${e}", password: "${p}"){
-          path
-          message
-        }
-    }
-`;
-
-const loginMutation = (e: string, p: string) => `
-    mutation {
-        login(email: "${e}", password: "${p}"){
-          path
-          message
-        }
-    }
-`;
+const email = faker.internet.email();
+const password = faker.internet.password();
 
 const loginExpectError = async (
   client: TestClient,
@@ -48,7 +30,7 @@ const loginExpectError = async (
 let conn: Connection;
 
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
 });
 
 afterAll(async () => {
