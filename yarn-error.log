@@ -1,5 +1,5 @@
 Arguments: 
-  /home/datreformedboi/.nvm/versions/node/v8.9.0/bin/node /home/datreformedboi/.yarn/bin/yarn.js add -D @ypes/express-rate-limit
+  /home/datreformedboi/.nvm/versions/node/v8.9.0/bin/node /home/datreformedboi/.yarn/bin/yarn.js add -D @types/merge-graphql-schemas
 
 PATH: 
   /home/datreformedboi/.nvm/versions/node/v8.9.0/bin:/home/datreformedboi/.yarn/bin:/home/datreformedboi/anaconda2/bin:/home/datreformedboi/Enthought/Canopy_64bit/User/bin:/home/datreformedboi/.cargo/bin:/home/datreformedboi/bin:/home/datreformedboi/.local/bin:/home/datreformedboi/.yarn/bin:/home/datreformedboi/anaconda2/bin:/home/datreformedboi/Enthought/Canopy_64bit/User/bin:/opt/OpenPrinting-Gutenprint/sbin:/opt/OpenPrinting-Gutenprint/bin:/home/datreformedboi/.cargo/bin:/home/datreformedboi/bin:/home/datreformedboi/.local/bin:/opt/OpenPrinting-Gutenprint/sbin:/opt/OpenPrinting-Gutenprint/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/datreformedboi/Desktop/swift4/swift-4.0-DEVELOPMENT-SNAPSHOT-2017-06-23-a-ubuntu16.04/usr/bin:/snap/bin:/usr/lib/jvm/java-9-oracle/bin:/usr/lib/jvm/java-9-oracle/db/bin:/usr/lib/jvm/java-9-oracle/bin:/usr/lib/jvm/java-9-oracle/db/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@ypes%2fexpress-rate-limit: Not found
+  Error: https://registry.yarnpkg.com/@types%2fmerge-graphql-schemas: Not found
       at Request.params.callback [as _callback] (/home/datreformedboi/.yarn/lib/cli.js:65327:18)
       at Request.self.callback (/home/datreformedboi/.yarn/lib/cli.js:133155:22)
       at emitTwo (events.js:126:13)
@@ -36,11 +36,16 @@ npm manifest:
       "@types/connect-redis": "^0.0.7",
       "@types/dotenv": "^4.0.3",
       "@types/express": "^4.11.1",
+      "@types/express-rate-limit": "^2.9.3",
       "@types/express-session": "^1.15.8",
+      "@types/faker": "^4.1.2",
+      "@types/glob": "^5.0.35",
       "@types/ioredis": "^3.2.7",
       "@types/jest": "^22.2.3",
       "@types/node": "^9.6.6",
       "@types/node-fetch": "^1.6.9",
+      "@types/passport": "^0.4.5",
+      "@types/passport-twitter": "^1.0.34",
       "@types/request-promise": "^4.1.41",
       "@types/sparkpost": "^2.1.3",
       "@types/uuid": "^3.4.3",
@@ -63,13 +68,18 @@ npm manifest:
       "express": "^4.16.3",
       "express-rate-limit": "^2.11.0",
       "express-session": "^1.15.6",
+      "faker": "^4.1.0",
+      "glob": "^7.1.2",
       "graphql": "^0.13.2",
       "graphql-import": "^0.5.2",
       "graphql-request": "^1.5.2",
       "graphql-tools": "^3.0.0",
       "graphql-yoga": "^1.9.2",
       "ioredis": "^3.2.2",
+      "merge-graphql-schemas": "^1.5.1",
       "node-fetch": "^2.1.2",
+      "passport": "^0.4.0",
+      "passport-twitter": "^1.0.4",
       "pg": "^7.4.1",
       "rate-limit-redis": "^1.4.0",
       "reflect-metadata": "^0.1.12",
@@ -85,7 +95,7 @@ npm manifest:
       "gen-schema-types": "ts-node src/scripts/createTypes.ts"
     },
     "jest": {
-      "globalSetup": "./src/testSetup/callSetup.js",
+      "globalSetup": "./src/testUtils/callSetup.js",
       "transform": {
         "^.+\\.tsx?$": "ts-jest"
       },
@@ -222,6 +232,12 @@ Lockfile:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
   
+  "@types/express-rate-limit@^2.9.3":
+    version "2.9.3"
+    resolved "https://registry.yarnpkg.com/@types/express-rate-limit/-/express-rate-limit-2.9.3.tgz#e83a548bf251ad12ca49055c22d3f2da4e16b62d"
+    dependencies:
+      "@types/express" "*"
+  
   "@types/express-serve-static-core@*":
     version "4.11.1"
     resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.11.1.tgz#f6f7212382d59b19d696677bcaa48a37280f5d45"
@@ -245,10 +261,22 @@ Lockfile:
       "@types/express-serve-static-core" "*"
       "@types/serve-static" "*"
   
+  "@types/faker@^4.1.2":
+    version "4.1.2"
+    resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.2.tgz#f8ab50c9f9af68c160dd71b63f83e24b712d0df5"
+  
   "@types/form-data@*":
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/@types/form-data/-/form-data-2.2.1.tgz#ee2b3b8eaa11c0938289953606b745b738c54b1e"
     dependencies:
+      "@types/node" "*"
+  
+  "@types/glob@^5.0.35":
+    version "5.0.35"
+    resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
+    dependencies:
+      "@types/events" "*"
+      "@types/minimatch" "*"
       "@types/node" "*"
   
   "@types/graphql@0.12.6":
@@ -274,6 +302,10 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
   
+  "@types/minimatch@*":
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
+  
   "@types/node-fetch@^1.6.9":
     version "1.6.9"
     resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.9.tgz#a750fb0f4cf2960bf72b462e4c86908022dd69c5"
@@ -287,6 +319,19 @@ Lockfile:
   "@types/node@^9.4.6":
     version "9.6.8"
     resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.8.tgz#32e3d3ef9ea285caeec70a05ab157847920a3fe4"
+  
+  "@types/passport-twitter@^1.0.34":
+    version "1.0.34"
+    resolved "https://registry.yarnpkg.com/@types/passport-twitter/-/passport-twitter-1.0.34.tgz#2e06ac0f57e01362e4bac3f806f4768376ad4607"
+    dependencies:
+      "@types/express" "*"
+      "@types/passport" "*"
+  
+  "@types/passport@*", "@types/passport@^0.4.5":
+    version "0.4.5"
+    resolved "https://registry.yarnpkg.com/@types/passport/-/passport-0.4.5.tgz#a6dd5bd2f96f2f15d350a688c3f59aa16d101c7a"
+    dependencies:
+      "@types/express" "*"
   
   "@types/redis@*":
     version "2.8.6"
@@ -1364,6 +1409,10 @@ Lockfile:
     version "0.1.3"
     resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   
+  deepmerge@^2.1.0:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.1.tgz#e862b4e45ea0555072bf51e7fd0d9845170ae768"
+  
   default-require-extensions@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/default-require-extensions/-/default-require-extensions-1.0.0.tgz#f37ea15d3e13ffd9b437d33e1a75b5fb97874cb8"
@@ -1739,6 +1788,10 @@ Lockfile:
   extsprintf@^1.2.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
+  
+  faker@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
   
   fast-deep-equal@^1.0.0:
     version "1.1.0"
@@ -3300,6 +3353,14 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
   
+  merge-graphql-schemas@^1.5.1:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/merge-graphql-schemas/-/merge-graphql-schemas-1.5.1.tgz#a9682d4067c0c80c0db631ec56b4573731e93dc3"
+    dependencies:
+      deepmerge "^2.1.0"
+      glob "^7.1.2"
+      is-glob "^4.0.0"
+  
   merge-stream@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-1.0.1.tgz#4041202d508a342ba00174008df0c251b8c135e1"
@@ -3578,6 +3639,10 @@ Lockfile:
     version "0.8.2"
     resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
   
+  oauth@0.9.x:
+    version "0.9.15"
+    resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
+  
   object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -3751,6 +3816,32 @@ Lockfile:
     version "0.1.1"
     resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   
+  passport-oauth1@1.x.x:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/passport-oauth1/-/passport-oauth1-1.1.0.tgz#a7de988a211f9cf4687377130ea74df32730c918"
+    dependencies:
+      oauth "0.9.x"
+      passport-strategy "1.x.x"
+      utils-merge "1.x.x"
+  
+  passport-strategy@1.x.x:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
+  
+  passport-twitter@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/passport-twitter/-/passport-twitter-1.0.4.tgz#01a799e1f760bf2de49f2ba5fba32282f18932d7"
+    dependencies:
+      passport-oauth1 "1.x.x"
+      xtraverse "0.1.x"
+  
+  passport@^0.4.0:
+    version "0.4.0"
+    resolved "https://registry.yarnpkg.com/passport/-/passport-0.4.0.tgz#c5095691347bd5ad3b5e180238c3914d16f05811"
+    dependencies:
+      passport-strategy "1.x.x"
+      pause "0.0.1"
+  
   path-dirname@^1.0.0:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/path-dirname/-/path-dirname-1.0.2.tgz#cc33d24d525e099a5388c0336c6e32b9160609e0"
@@ -3798,6 +3889,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/pause-stream/-/pause-stream-0.0.11.tgz#fe5a34b0cbce12b5aa6a2b403ee2e73b602f1445"
     dependencies:
       through "~2.3"
+  
+  pause@0.0.1:
+    version "0.0.1"
+    resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
   
   performance-now@^2.1.0:
     version "2.1.0"
@@ -4984,7 +5079,7 @@ Lockfile:
       define-properties "^1.1.2"
       object.getownpropertydescriptors "^2.0.3"
   
-  utils-merge@1.0.1:
+  utils-merge@1.0.1, utils-merge@1.x.x:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   
@@ -5164,9 +5259,19 @@ Lockfile:
     version "9.0.7"
     resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
   
+  xmldom@0.1.x:
+    version "0.1.27"
+    resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
+  
   xtend@^4.0.0:
     version "4.0.1"
     resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
+  
+  xtraverse@0.1.x:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/xtraverse/-/xtraverse-0.1.0.tgz#b741bad018ef78d8a9d2e83ade007b3f7959c732"
+    dependencies:
+      xmldom "0.1.x"
   
   y18n@^3.2.1:
     version "3.2.1"
