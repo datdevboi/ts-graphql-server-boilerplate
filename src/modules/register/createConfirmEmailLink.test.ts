@@ -30,7 +30,7 @@ describe("test createConfirmEmailLink", async () => {
     const text = await response.text();
 
     expect(text).toBe("ok");
-    const user: User = await User.findOne({
+    const user: any = await User.findOne({
       where: {
         id: userId
       }
