@@ -1,7 +1,8 @@
+import { createTestConn } from "./../../testUtils/createTestConn";
 import * as Redis from "ioredis";
 import fetch from "node-fetch";
-import { createTypeormConn } from "./createTypeormConn";
-import { User } from "./../entity/User";
+
+import { User } from "../../entity/User";
 import { createConfirmEmailLink } from "./createConfirmedEmailLink";
 
 let user: User;
@@ -9,7 +10,7 @@ const redis: Redis.Redis = new Redis();
 let id: string = "";
 
 beforeAll(async () => {
-  await createTypeormConn();
+  await createTestConn();
   user = await User.create({
     email: "test3@test.com",
     password: "test3@test"
