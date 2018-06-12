@@ -12,9 +12,14 @@ import * as RateLimitRedis from "rate-limit-redis";
 import { confirmEmail } from "./routes/confirmEmail";
 import { redis } from "./redis";
 import { User } from "./entity/User";
+import { createTestConn } from "./testUtils/createTestConn";
 
 const RedisStore = connect(session);
 export const startServer = async () => {
+  if (process.env.NODE_ENV === "test") {
+    await redis.flushall();
+  }
+
   const server = new GraphQLServer({
     schema: genSchema(),
     context: ({ request }) => ({
@@ -61,7 +66,13 @@ export const startServer = async () => {
 
   server.express.get("/confirm/:id", confirmEmail);
 
-  const connection = await createTypeormConn();
+  let connection: any;
+
+  if (process.env.NODE_ENV === "test") {
+    connection = await createTestConn(true);
+  } else {
+    connection = await createTypeormConn();
+  }
 
   passport.use(
     new Strategy(
