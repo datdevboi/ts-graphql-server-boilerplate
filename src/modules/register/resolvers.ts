@@ -7,7 +7,7 @@ import {
   invalidEmail,
   passwordNotLongEnough
 } from "./errorMessages";
-import { createConfirmEmailLink } from "../../utils/createConfirmedEmailLink";
+import { createConfirmEmailLink } from "./createConfirmedEmailLink";
 import sendEmail from "../../utils/sendEmail";
 
 const schema = yup.object().shape({
