@@ -1,14 +1,14 @@
 import * as yup from "yup";
-import { ResolverMap } from "../../types/graphql-utils";
-import { User } from "../../entity/User";
-import { formatYupError } from "../../utils/formatYupError";
+import { ResolverMap } from "../../../types/graphql-utils";
+import { User } from "../../../entity/User";
+import { formatYupError } from "../../../utils/formatYupError";
 import {
   duplicateEmail,
   invalidEmail,
   passwordNotLongEnough
 } from "./errorMessages";
 import { createConfirmEmailLink } from "./createConfirmedEmailLink";
-import sendEmail from "../../utils/sendEmail";
+import sendEmail from "../../../utils/sendEmail";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,9 +23,6 @@ const schema = yup.object().shape({
 });
 
 export const resolvers: ResolverMap = {
-  Query: {
-    bye: () => "Bye"
-  },
   Mutation: {
     register: async (_, args: GQL.IRegisterOnMutationArguments, context) => {
       try {

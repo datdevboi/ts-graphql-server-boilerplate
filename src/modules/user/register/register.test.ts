@@ -1,6 +1,6 @@
-import { createTestConn } from "./../../testUtils/createTestConn";
+import { createTestConn } from "../../../testUtils/createTestConn";
 
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import * as faker from "faker";
 
 import {
@@ -10,8 +10,9 @@ import {
   passwordNotLongEnough
 } from "./errorMessages";
 import { Connection } from "typeorm";
-import { TestClient } from "../../utils/TestClient";
+import { TestClient } from "../../../utils/TestClient";
 
+faker.seed(Date.now() + 4);
 const email = faker.internet.email();
 const password = faker.internet.password();
 

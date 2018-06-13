@@ -1,18 +1,20 @@
 import { expiredKeyError } from "./errorMessages";
-import { passwordNotLongEnough } from "./../register/errorMessages";
-import { forgotPasswordLockAccount } from "./../../utils/forgotPasswordLockAccount";
+
+import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import * as Redis from "ioredis";
-import { createForgotPasswordLink } from "./../../utils/createForgotPasswordLink";
-import { User } from "./../../entity/User";
+import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLink";
+import { User } from "../../../entity/User";
 
 import { Connection } from "typeorm";
-import { TestClient } from "../../utils/TestClient";
+import { TestClient } from "../../../utils/TestClient";
 import * as faker from "faker";
 
 import { forgotPasswordLockedError } from "../login/errorMessages";
-import { createTestConn } from "../../testUtils/createTestConn";
+import { createTestConn } from "../../../testUtils/createTestConn";
+import { passwordNotLongEnough } from "../register/errorMessages";
 
 let conn: Connection;
+faker.seed(Date.now() + 0);
 const email = faker.internet.password();
 const password = faker.internet.password();
 const newPassword = faker.internet.password();

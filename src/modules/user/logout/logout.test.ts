@@ -1,11 +1,12 @@
-import { createTestConn } from "./../../testUtils/createTestConn";
-import { User } from "./../../entity/User";
+import { createTestConn } from "../../../testUtils/createTestConn";
+import { User } from "../../../entity/User";
 
 import { Connection } from "typeorm";
-import { TestClient } from "../../utils/TestClient";
+import { TestClient } from "../../../utils/TestClient";
 import * as faker from "faker";
 
 let conn: Connection;
+faker.seed(Date.now() + 2);
 const email = faker.internet.email();
 const password = faker.internet.password();
 let userId: string;

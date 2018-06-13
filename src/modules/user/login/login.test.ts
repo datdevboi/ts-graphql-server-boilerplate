@@ -1,11 +1,12 @@
-import { createTestConn } from "./../../testUtils/createTestConn";
-import { TestClient } from "./../../utils/TestClient";
+import { createTestConn } from "../../../testUtils/createTestConn";
+import { TestClient } from "../../../utils/TestClient";
 
 import * as faker from "faker";
 import { invalidLogin, confirmEmailError } from "./errorMessages";
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import { Connection } from "typeorm";
 
+faker.seed(Date.now() + 1);
 const email = faker.internet.email();
 const password = faker.internet.password();
 

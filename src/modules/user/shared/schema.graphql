@@ -1,3 +1,9 @@
-type Query {
-  hello(name: String): String!
+type User {
+  id: ID!
+  email: String!
+}
+
+type Error {
+  path: String!
+  message: String!
 }

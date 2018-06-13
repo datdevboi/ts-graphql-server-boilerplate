@@ -1,8 +1,8 @@
-import { userSessionIdPrefix } from "./../../constants";
+import { userSessionIdPrefix } from "../../../constants";
 import * as bcrypt from "bcryptjs";
 
-import { ResolverMap } from "../../types/graphql-utils";
-import { User } from "../../entity/User";
+import { ResolverMap } from "../../../types/graphql-utils";
+import { User } from "../../../entity/User";
 import {
   invalidLogin,
   confirmEmailError,
@@ -11,9 +11,6 @@ import {
 
 // TODO FIX THE GENERATE SCHEMA SCRIPT ERROR
 export const resolvers: ResolverMap = {
-  Query: {
-    bye2: () => "bye"
-  },
   Mutation: {
     login: async (
       _,
